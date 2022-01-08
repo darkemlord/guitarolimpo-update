@@ -6,6 +6,7 @@ import Shopify, { ApiVersion } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
+import axios from "axios";
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -76,6 +77,22 @@ app.prepare().then(async () => {
     } catch (error) {
       console.log(`Failed to process webhook: ${error}`);
     }
+  });
+
+  router.get("/getProducts", verifyRequest(), async (ctx, res) => {
+    const { shop, accessToken } = ctx.session;
+    const url = `https://${shop}/admin/api/2022-01/products.json`;
+    const shopifyHeaders = (token) => ({
+      "Content-Type": "application/json",
+      "X-Shopify-Access-Token": token,
+    });
+
+    const getProducts = await axios.get(url, {
+      headers: shopifyHeaders(accessToken),
+    });
+
+    ctx.body = getProducts.data;
+    ctx.res.statusCode = 200;
   });
 
   router.post(
