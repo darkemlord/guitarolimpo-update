@@ -2,11 +2,6 @@ import React from "react";
 import { Card, Layout, Page } from "@shopify/polaris";
 
 class Products extends React.Component {
-  componentDidMount() {
-    fetch("/getProducts")
-      .then((res) => res.json())
-      .then((items) => console.log(items));
-  }
   render() {
     return (
       <Page>
@@ -16,7 +11,7 @@ class Products extends React.Component {
         >
           <Card sectioned>
             <div>
-              <p>List of guitars here!</p>
+              <p>List of guitars here! check it out!</p>
             </div>
           </Card>
         </Layout.AnnotatedSection>
