@@ -9,11 +9,7 @@ class Products extends React.Component {
           title="products"
           description="best guitars in the world"
         >
-          <Card sectioned>
-            <div>
-              <p>List of guitars here! check it out!</p>
-            </div>
-          </Card>
+          <Card sectioned></Card>
         </Layout.AnnotatedSection>
       </Page>
     );
